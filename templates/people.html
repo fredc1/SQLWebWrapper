@@ -1,0 +1,25 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: courier;
+    }
+  </style>
+
+
+<body>
+  <h1><a href="/">^Back</a>Congressmen</h1>
+  <div>{{data[1]}}</div><br>
+  <div>
+    {% for r in data[0] %}
+
+    <div><a href="/individual?cid={{r[1]}}">{{r[0]}}</a></div><br>
+    {% endfor %}
+  </div>
+
+
+
+</body>
+
+
+</html>

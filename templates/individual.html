@@ -1,0 +1,31 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: courier;
+    }
+  </style>
+
+
+<body>
+  <h1><a href="/people">^Back</a>{{name}}</h1>
+  <div>Description: {{description}}</div>
+
+  <form method="POST" action="/addNewIndividualDescription?cid={{cid}}">
+  <p>Update this description: <input type="text" name="description"> <input type="submit" value="Submit"></p>
+  </form>
+
+  <div>Voting Record:</div>
+  <div>
+    {% for r in data %}
+
+    <div>{{r}}</div><br>
+    {% endfor %}
+  </div>
+
+
+
+</body>
+
+
+</html>
