@@ -1,0 +1,24 @@
+<html>
+  <style>
+    body{
+      font-size: 15pt;
+      font-family: courier;
+    }
+  </style>
+
+
+<body>
+  <h1><a href="/committees">^Back</a>{{name}} Committee</h1>
+
+  <div>
+    {% for r in data %}
+    <div><a href="/individual?cid={{r[0]}}">{{r[1]}}</a></div><br>
+    {% endfor %}
+  </div>
+
+
+
+</body>
+
+
+</html>

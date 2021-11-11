@@ -109,11 +109,12 @@ def format_committee_rows(rows):
     result = []
     result.append("Name_____________________________________Chair__________________________Description")
     result.append("-----------------------------------------------------------------------------------")
-
+    names = ["null", "null"]
     for row in rows:
+        names.append(row[0])
         result.append(f"{row[0]:<40} {row[1]:<10} {row[2]}".replace(" ", "_"))
 
-    return result
+    return [result, names]
 
 
 @app.route("/committees")
@@ -129,10 +130,27 @@ def committees():
         rows.append(row)
     cursor.close()
 
-    row_strings = format_committee_rows(rows)
-    context = dict(data=row_strings)
+    data, names = format_committee_rows(rows)
+
+    context = dict(names=names, data=data, length=len(names))
     return render_template("committees.html", **context)
 
+@app.route("/committee")
+def committee():
+    print(request.args)
+    name = request.args['name']
+    query = f"SELECT C.cid, C.name FROM (SELECT cid FROM sits_on_committee WHERE name=\'{name}\') S LEFT OUTER JOIN congressman C ON S.cid=C.cid"
+    cursor = g.conn.execute(query)
+    rows = []
+    for result in cursor:
+        row = []
+        for field in result:
+            row.append(field)  # can also be accessed using result[0]
+        rows.append(row)
+
+    cursor.close()
+    context = dict(data=rows, name=name)
+    return render_template("comittee.html", **context)
 
 def format_individual_voting_record(rows):
     result = []

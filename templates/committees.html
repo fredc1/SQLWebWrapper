@@ -11,8 +11,13 @@
   <h1><a href="/">^Back</a>Committees</h1>
 
   <div>
-    {% for r in data %}
-    <div>{{r}}</div><br>
+    {% for i in range(length) %}
+    {% if names[i] == "null"%}
+      <div>{{data[i]}}</div><br>
+    {% endif %}
+    {% if names[i] != "null"%}
+      <div><a href="/committee?name={{names[i]}}">{{data[i]}}</a></div><br>
+    {% endif %}
     {% endfor %}
   </div>
 
