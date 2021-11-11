@@ -1,0 +1,5 @@
+flask==1.1.2
+uncertainties==3.1.6
+flask-wtf==0.15.1
+WTForms~=2.3.3
+SQLAlchemy==1.4.26
