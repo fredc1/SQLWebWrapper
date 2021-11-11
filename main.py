@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 
-DATABASEURI = "postgresql://fc2687:3840@104.196.152.219/proj1part2"
+DATABASEURI = "postgresql://fc2687:3840@35.196.73.133/proj1part2"
 engine = create_engine(DATABASEURI)
 
 @app.before_request
@@ -42,18 +42,18 @@ def teardown_request(exception):
 @app.route("/")
 def index():
     print(request.args)
-    cursor = g.conn.execute("SELECT name FROM senator")
+    cursor = g.conn.execute("SELECT cid FROM senator")
     names = []
     for result in cursor:
-        names.append(result['name'])  # can also be accessed using result[0]
+        names.append(result['cid'])  # can also be accessed using result[0]
     cursor.close()
     context = dict(data=names)
     return render_template("index.html", **context)
 
 
 def main():
-    #app.run(host="0.0.0.0", port=8111, debug=False)
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8111, debug=False)
+    #app.run(host="127.0.0.1", port=8080, debug=True)
 
 
 if __name__ == '__main__':
